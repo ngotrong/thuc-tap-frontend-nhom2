@@ -2,7 +2,7 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: ['nghesachnoi.com', 'cloudflare-ipfs.com', '2f75-14-232-135-216.ngrok-free.app'],
+    domains: ['nghesachnoi.com', 'cloudflare-ipfs.com', '2f75-14-232-135-216.ngrok-free.app', '96ff-14-232-135-216.ngrok-free.app'],
   },
 };
 

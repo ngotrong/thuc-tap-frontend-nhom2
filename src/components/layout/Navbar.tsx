@@ -61,7 +61,7 @@ function Navbar() {
               Sách nói online
             </Link>
           </div>
-          <SearchInput />
+          <SearchInput/>
           <div className="flex items-center">
             <div className="flex items-center gap-4">
               <Popover
