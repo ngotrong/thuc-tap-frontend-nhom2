@@ -26,6 +26,10 @@ function Home() {
 
   if (!data) return <div>Không có dữ liệu</div>;
 
+  const kinhDoanhAudiobooks = data.data.results.filter(
+    (audiobook: { genre: { name: string; }; }) => audiobook.genre.name === "Kinh doanh"
+  );
+
   return (
     <div className={"pt-6"}>
       <div className="text-2xl font-semibold">Sách nói</div>
@@ -64,8 +68,8 @@ function Home() {
       <AudioBookSection
         title="Sách nói Kỹ Năng Sống"
         subtitle="Sách nói về kỹ năng sống, xem tất cả "
-        data={data?.data?.results || []}
-        // data={data.data?.results}
+        // data={data?.data?.results || []}
+        data={kinhDoanhAudiobooks}
       />
     </div>
   );

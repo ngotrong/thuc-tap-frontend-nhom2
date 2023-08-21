@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import LiveSearch from '../LiveSearch/LiveSearch';
 import useSWR from 'swr';
 import { fetcher } from '@/utils/api';
+import router from 'next/router';
 
 const SearchInput: React.FC = () => {
   const [results, setResults] = useState<{ id: string; title: string }[]>();
@@ -14,11 +15,6 @@ const SearchInput: React.FC = () => {
     'http://localhost:8080/api/v1/audio-book',
     fetcher
   );
-
-  // const { data: bookData } = useSWR(
-  //   'https://373d-14-232-135-216.ngrok-free.app/api/v1/audio-book',
-  //   fetcher
-  // ); 
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const query = e.target.value.toLowerCase();
@@ -35,13 +31,18 @@ const SearchInput: React.FC = () => {
     setResults(filteredValue);
   };
 
+  const handleSelectAudiobook = (selectedAudiobook: { id: string; title: string }) => {
+    router.push(`/audiobook/${selectedAudiobook.id}`);
+  };
+
   return (
     <LiveSearch
       results={results}
       value={selectedProfile?.title}
       renderItem={(item) => <p>{item.title}</p>}
       onChange={handleChange}
-      onSelect={(item) => setSelectedProfile(item)}
+      // onSelect={(item) => setSelectedProfile(item)}
+      onSelect={handleSelectAudiobook}
     />
   );
 };

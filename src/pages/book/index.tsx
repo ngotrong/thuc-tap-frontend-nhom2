@@ -1,5 +1,4 @@
 import React from "react";
-// import { Clock, PlayCircle, Bookmark, Heart } from "lucide-react";
 import AppLayout from "@/components/layout/AppLayout";
 import Image from "next/image";
 
