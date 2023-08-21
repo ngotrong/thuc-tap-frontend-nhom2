@@ -1,4 +1,5 @@
-import { FC, useCallback, useEffect, useRef, useState } from "react";
+import { useRouter } from 'next/router';
+import { FC, useCallback, useEffect, useRef, useState } from 'react';
 
 interface Props<T> {
   results?: T[];
@@ -18,7 +19,9 @@ const LiveSearch = <T extends object>({
   const [focusedIndex, setFocusedIndex] = useState(-1);
   const resultContainer = useRef<HTMLDivElement>(null);
   const [showResults, setShowResults] = useState(false);
-  const [defaultValue, setDefaultValue] = useState("");
+  const [defaultValue, setDefaultValue] = useState('');
+
+  const router = useRouter();
 
   const handleSelection = (selectedIndex: number) => {
     const selectedItem = results[selectedIndex];
@@ -37,20 +40,20 @@ const LiveSearch = <T extends object>({
     let nextIndexCount = 0;
 
     // move down
-    if (key === "ArrowDown")
+    if (key === 'ArrowDown')
       nextIndexCount = (focusedIndex + 1) % results.length;
 
     // move up
-    if (key === "ArrowUp")
+    if (key === 'ArrowUp')
       nextIndexCount = (focusedIndex + results.length - 1) % results.length;
 
     // hide search results
-    if (key === "Escape") {
+    if (key === 'Escape') {
       resetSearchComplete();
     }
 
     // select the current item
-    if (key === "Enter") {
+    if (key === 'Enter') {
       e.preventDefault();
       handleSelection(focusedIndex);
     }
@@ -65,10 +68,28 @@ const LiveSearch = <T extends object>({
   };
 
   useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      if (url.includes('audiobook')) {
+        return;
+      }
+
+      setDefaultValue('');
+    };
+
+    router.events.on('routeChangeStart', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange);
+    };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
     if (!resultContainer.current) return;
 
     resultContainer.current.scrollIntoView({
-      block: "center",
+      block: 'center',
     });
   }, [focusedIndex]);
 
@@ -83,24 +104,24 @@ const LiveSearch = <T extends object>({
   }, [value]);
 
   return (
-    <div className="flex items-center justify-center">
+    <div className="flex items-center justify-center w-full max-w-md px-4 py-2 border rounded-md hover:border-black">
       <div
         tabIndex={1}
         onBlur={resetSearchComplete}
         onKeyDown={handleKeyDown}
-        className="relative"
+        className="relative w-full"
       >
         <input
           value={defaultValue}
           onChange={handleChange}
           type="text"
-          className="w-full px-2 mr-2 focus:outline-none"
+          className="w-full focus:outline-none"
           placeholder="Tìm kiếm sách theo tên ..."
         />
 
         {/* Search Results Container */}
         {showResults && (
-          <div className="absolute mt-1 w-full p-2 bg-white shadow-lg rounded-bl rounded-br max-h-56 overflow-y-auto">
+          <div className="absolute w-full p-2 mt-1 overflow-y-auto bg-white rounded-bl rounded-br shadow-lg max-h-56">
             {results.map((item, index) => {
               return (
                 <div
@@ -109,9 +130,9 @@ const LiveSearch = <T extends object>({
                   ref={index === focusedIndex ? resultContainer : null}
                   style={{
                     backgroundColor:
-                      index === focusedIndex ? "rgba(0,0,0,0.1)" : "",
+                      index === focusedIndex ? 'rgba(0,0,0,0.1)' : '',
                   }}
-                  className="cursor-pointer hover:bg-black hover:bg-opacity-10 p-2"
+                  className="p-2 cursor-pointer hover:bg-black hover:bg-opacity-10"
                 >
                   {renderItem(item)}
                 </div>
