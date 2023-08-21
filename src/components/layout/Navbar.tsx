@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BookCopy, User2 } from "lucide-react";
 import Popover from "../popover";
 import SearchInput from "../SearchInput/SearchInput";
-import Link from "next/link"
+import Link from "next/link";
 
 function Navbar() {
+  const [genres, setGenres] = useState([]);
+
+  useEffect(() => {
+    fetch("http://localhost:8080/api/v1/genre")
+      .then((response) => response.json())
+      .then((data) => setGenres(data.data));
+  }, []);
+
   const navBookActions = [
     {
       id: 1,
@@ -57,11 +65,14 @@ function Navbar() {
         <div className="flex flex-row items-center justify-between h-full">
           <div className="flex items-center">
             <BookCopy size={30} color="#B8161D" />
-            <Link href="/home" className="ml-[8px] capitalize font-semibold hover:text-red-500">
+            <Link
+              href="/home"
+              className="ml-[8px] capitalize font-semibold hover:text-red-500"
+            >
               Sách nói online
             </Link>
           </div>
-          <SearchInput/>
+          <SearchInput />
           <div className="flex items-center">
             <div className="flex items-center gap-4">
               <Popover
@@ -77,6 +88,12 @@ function Navbar() {
                         {action.text}
                       </button>
                     ))}
+
+                    {/* {genres?.map((genre) => (
+                      <Link href={`/genre/${genre.name}`} key={genre.id}  className="px-6 py-2 hover:text-red-500 hover:bg-neutral-100">
+                          {genre.name}
+                      </Link>
+                    ))} */}
                   </div>
                 }
               />
