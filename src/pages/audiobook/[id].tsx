@@ -16,7 +16,11 @@ const AudiobookDetailPage = () => {
   );
 
   if (error) {
-    return <div className="text-xl font-semibold pt-5">Có lỗi xảy ra khi tải dữ liệu.</div>;
+    return (
+      <div className="text-xl font-semibold pt-5">
+        Có lỗi xảy ra khi tải dữ liệu.
+      </div>
+    );
   }
 
   if (!audiobookData) {
@@ -31,17 +35,14 @@ const AudiobookDetailPage = () => {
     <div>
       <div className="bg-red-700 h-[330px]">
         <AppLayout>
-          <div className="flex text-white">
-            <div className="py-10 pr-10">
-              <Image
-                className="rounded-lg"
-                width={198}
-                height={297}
-                src={audiobook?.image}
-                alt={audiobook?.title}
-                //layout="fixed"
-              />
-            </div>
+          <div className="flex text-white items-center h-[330px]">
+            <Image
+              className="rounded-lg w-[198px] h-[297px]"
+              width={198}
+              height={297}
+              src={audiobook?.image}
+              alt={audiobook?.title}
+            />
 
             <div className="py-10 flex flex-col items-center flex-1 justify-center">
               <div className="mb-7 text-2xl font-semibold">
@@ -53,15 +54,13 @@ const AudiobookDetailPage = () => {
               <div className="mb-7 text-[18px]">{audiobook?.genre?.name}</div>
             </div>
 
-            <div className="ml-auto py-10 pl-10">
-              <Image
-                className="rounded-lg"
-                width={198}
-                height={297}
-                src={audiobook?.image}
-                alt={audiobook?.title}
-              />
-            </div>
+            <Image
+              className="rounded-lg w-[198px] h-[297px]"
+              width={198}
+              height={297}
+              src={audiobook?.author?.[0]?.image}
+              alt={audiobook?.title}
+            />
           </div>
         </AppLayout>
       </div>

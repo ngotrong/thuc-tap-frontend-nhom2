@@ -1,7 +1,7 @@
 export const fetcher = async (...args: any[]) => {
   const token =
     window.localStorage.getItem("token") ||
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVhdiI6MTY5MjE3MTY2Mjc3MCwiaWF0IjoxNjkyMTcxNjYyLCJleHAiOjE2OTMwMzU2NjJ9.mcMQP9u14Txd4TmGKNsGP3T5Vxq3PliQ_saXP6-H2W0";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVhdiI6MTY5MjYzODY0Nzc5MywiaWF0IjoxNjkyNjM4NjQ3LCJleHAiOjE2OTM1MDI2NDd9.Fjprlbl_y414IftCkQrpHueUnKbUl5n4C4Wef5G-_Qc";
 
   // @ts-ignore
   return fetch(...args, {
