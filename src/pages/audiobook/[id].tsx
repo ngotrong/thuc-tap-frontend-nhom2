@@ -4,6 +4,8 @@ import useSWR from "swr";
 import { fetcher } from "@/utils/api";
 import AppLayout from "@/components/layout/AppLayout";
 import Image from "next/image";
+import ReactPlayer from "react-player";
+import Link from "next/link";
 
 const AudiobookDetailPage = () => {
   const router = useRouter();
@@ -37,9 +39,9 @@ const AudiobookDetailPage = () => {
         <AppLayout>
           <div className="flex text-white items-center h-[330px]">
             <Image
-              className="rounded-lg w-[198px] h-[297px]"
+              className="rounded-lg w-[198px] h-[290px]"
               width={198}
-              height={297}
+              height={290}
               src={audiobook?.image}
               alt={audiobook?.title}
             />
@@ -52,12 +54,27 @@ const AudiobookDetailPage = () => {
                 {audiobook?.author?.[0]?.name}
               </div>
               <div className="mb-7 text-[18px]">{audiobook?.genre?.name}</div>
+
+              {audiobook?.url ? (
+                <ReactPlayer
+                  url={audiobook?.url}
+                  controls
+                  width="80%"
+                  height="40px"
+                  // playing={true}
+                  // loop={true}
+                />
+              ) : (
+                <Link href="#" className="">
+                  Bạn cần nâng cấp vip để nghe
+                </Link>
+              )}
             </div>
 
             <Image
-              className="rounded-lg w-[198px] h-[297px]"
+              className="rounded-lg w-[198px] h-[290px]"
               width={198}
-              height={297}
+              height={290}
               src={audiobook?.author?.[0]?.image}
               alt={audiobook?.title}
             />

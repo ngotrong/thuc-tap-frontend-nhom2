@@ -26,7 +26,7 @@ function Home() {
 
   if (!data) return <div>Không có dữ liệu</div>;
 
-  const kinhDoanhAudiobooks = data.data.results.filter(
+  const kinhDoanhAudiobooks = data?.data?.results?.filter(
     (audiobook: { genre: { name: string; }; }) => audiobook.genre.name === "Kinh doanh"
   );
 

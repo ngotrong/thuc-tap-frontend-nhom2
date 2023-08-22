@@ -3,14 +3,19 @@ import { useRouter } from "next/router";
 import AudioBookSection from "@/components/audio/AudioBookSection";
 import useSWR from "swr";
 import { fetcher } from "@/utils/api";
+import queryString from "query-string";
+
 import AudioBookItem from "@/components/audio/AudioBookItem";
 import { data } from "autoprefixer";
 
 const GenreDetailPage = () => {
   const router = useRouter();
-  const { genreName } = router.query; // Sửa thành "genreName"
+  const { genreName } = router.query;
+  const filter = `{ "genre.id": "${genreName}"}`; // Tạo filter từ genre.id
+  // const queryStringified = queryString.stringify(filter); // Tạo query string từ filter
+
   const { data: genreData, error } = useSWR(
-    `http://localhost:8080/api/v1/genre/${genreName}`, // Sửa thành "genreName"
+    `http://localhost:8080/api/v1/audio-book?filter=${filter}`, // Sử dụng query string trong URL
     fetcher
   );
 
@@ -22,28 +27,17 @@ const GenreDetailPage = () => {
     return <div>Đang tải dữ liệu...</div>;
   }
 
-  const audiobooks = genreData?.data?.audiobooks;
+  const audiobooks = genreData?.data?.results;
+
+  // console.log(audiobooks);
+  console.log(router.query);
 
   return (
     <div>
       <AudioBookSection
-        title={`Sách nói thể loại ${genreData?.data?.name}`} // Sửa title
+        title={`Sách nói thể loại ${audiobooks?.[0]?.genre?.name}`}
         data={audiobooks}
-        subtitle=""
       />
-
-      <AudioBookSection
-        title="Sách nói nổi bật"
-        subtitle="Sách nói nghe nhiều tuần qua, xem tất cả "
-        data={genreData?.data?.results || []}
-      />
-
-      {/* <AudioBookItem
-        imgSrc={book.image}
-        bookName={book.title}
-        author={book.author}
-        audiobookId={book.id}
-      /> */}
     </div>
   );
 };

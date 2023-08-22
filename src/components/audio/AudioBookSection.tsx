@@ -4,12 +4,14 @@ import Link from "next/link";
 
 interface Props {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   data: any[];
 }
 
 const AudioBookSection = ({ title, subtitle, data }: Props) => {
   // console.log(data)
+
+  console.log(subtitle);
 
   return (
     <>
@@ -19,9 +21,11 @@ const AudioBookSection = ({ title, subtitle, data }: Props) => {
         </div>
         <p className="mt-2">
           {subtitle}
-          <Link href="/audiobook" className="text-blue-700 cursor-pointer">
-            tại đây
-          </Link>
+          {subtitle ? (
+            <Link href="/audiobook" className="text-blue-700 cursor-pointer">
+              tại đây
+            </Link>
+          ):''}
         </p>
       </div>
       <div className="mt-6">

@@ -1,7 +1,11 @@
 export const fetcher = async (...args: any[]) => {
   const token =
-    window.localStorage.getItem("token") ||
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVhdiI6MTY5MjYzODY0Nzc5MywiaWF0IjoxNjkyNjM4NjQ3LCJleHAiOjE2OTM1MDI2NDd9.Fjprlbl_y414IftCkQrpHueUnKbUl5n4C4Wef5G-_Qc";
+    // window.localStorage.getItem("token") ||
+    // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVhdiI6MTY5MjYzODY0Nzc5MywiaWF0IjoxNjkyNjM4NjQ3LCJleHAiOjE2OTM1MDI2NDd9.Fjprlbl_y414IftCkQrpHueUnKbUl5n4C4Wef5G-_Qc";
+
+    JSON.parse(
+      localStorage.getItem("token") ?? ""
+    )
 
   // @ts-ignore
   return fetch(...args, {
@@ -99,6 +103,11 @@ class Api {
     const api = await this.AXIOS();
     return api.delete(url, { params: params });
   }
+
+  public getBaseUrl() {
+    return this.getConfig().baseURL;
+  }
 }
+
 
 export default new Api();

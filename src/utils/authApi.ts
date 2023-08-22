@@ -6,6 +6,10 @@ class AuthApi {
 		this.baseUrl = '/auth';
 	}
 
+	async getMe(): Promise<ApiResponse<IUser>> {
+		return Api.GET<ApiResponse<IUser>> ('/users' + '/get-me');
+	}
+
 	async login(loginInfomation: ILogin): Promise<ApiResponse<IUser>> {
 		return Api.POST<ApiResponse<IUser>>(
 			this.baseUrl + '/login',

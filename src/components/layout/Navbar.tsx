@@ -5,13 +5,13 @@ import SearchInput from "../SearchInput/SearchInput";
 import Link from "next/link";
 
 function Navbar() {
-  const [genres, setGenres] = useState([]);
+  // const [genres, setGenres] = useState([]);
 
-  useEffect(() => {
-    fetch("http://localhost:8080/api/v1/genre")
-      .then((response) => response.json())
-      .then((data) => setGenres(data.data));
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://localhost:8080/api/v1/genre")
+  //     .then((response) => response.json())
+  //     .then((data) => setGenres(data.data));
+  // }, []);
 
   const navBookActions = [
     {
