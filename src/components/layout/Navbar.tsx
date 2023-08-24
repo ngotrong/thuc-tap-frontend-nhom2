@@ -8,6 +8,7 @@ import { fetcher } from "@/utils/api";
 import { useAppDispatch } from "@/redux/hooks";
 import { logout } from "@/redux/features/authSlice";
 import { useRouter } from "next/router";
+import { UrlObject } from "url";
 export function convertViToEn(str: string, toUpperCase = false) {
   str = str.toLowerCase().trim();
   str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
@@ -25,69 +26,21 @@ export function convertViToEn(str: string, toUpperCase = false) {
 }
 
 function Navbar() {
-  // const { data: genresData, error: genresError } = useSWR(
-  //   "http://localhost:8080/api/v1/audio-book",
-  //   fetcher
-  // );
-
-  const { data: genresData, error: genresError } = useSWR(
+  const { data: genresData } = useSWR(
     "http://localhost:8080/api/v1/genre",
     fetcher
   );
 
-  if (genresError) {
-    return <div>Có lỗi xảy ra khi tải dữ liệu thể loại.</div>;
-  }
-
-  if (!genresData) {
-    return <div>Đang tải dữ liệu thể loại...</div>;
-  }
-
   const dispatch = useAppDispatch();
   const router = useRouter();
 
-  const navBookActions = genresData.data.results.map((genre) => ({
-    id: genre.id,
-    text: genre.name,
-    path: `/genre/${convertViToEn(genre.name).replace(/\s/g, "-")}`,
-  }));
-
-  // const navBookActions = genresData.data.results.map((genre) => ({
-  //   id: genre.id,
-  //   text: genre.name,
-  //   path: `/genre/${genre.name}`,
-  // }));
-
-  // const [genres, setGenres] = useState([]);
-
-  // useEffect(() => {
-  //   fetch("http://localhost:8080/api/v1/genre")
-  //     .then((response) => response.json())
-  //     .then((data) => setGenres(data.data));
-  // }, []);
-
-  // const navBookActions = [
-  //   {
-  //     id: 1,
-  //     text: "Sách nói mới",
-  //     path: "/AboutUs",
-  //   },
-  //   {
-  //     id: 2,
-  //     text: "Sách nói hay",
-  //     path: "/all",
-  //   },
-  //   {
-  //     id: 3,
-  //     text: "Danh nhân",
-  //     path: "/all",
-  //   },
-  //   {
-  //     id: 4,
-  //     text: "Chứng khoán",
-  //     path: "/all",
-  //   },
-  // ];
+  const navBookActions = genresData?.data?.results.map(
+    (genre: { id: any; name: string }) => ({
+      id: genre.id,
+      text: genre.name,
+      path: `/genre/${convertViToEn(genre.name).replace(/\s/g, "-")}`,
+    })
+  );
 
   const navAuthorActions = [
     {
@@ -140,29 +93,33 @@ function Navbar() {
                 text="Sách Nói"
                 Content={
                   <div className="flex flex-col">
-                    {navBookActions.map((action) => (
-                      // <button
-                      //   key={action.id}
-                      //   onClick={() => {}}
-                      //   className="px-6 py-2 hover:text-red-500 hover:bg-neutral-100"
-                      // >
-                      //   {action.text}
-                      // </button>
-
-                      <Link
-                        href={action.path}
-                        key={action.id}
-                        className="px-6 py-2 hover:text-red-500 hover:bg-neutral-100"
-                      >
-                        {action.text}
-                      </Link>
-                    ))}
-
-                    {/* {genres?.map((genre) => (
-                      <Link href={`/genre/${genre.name}`} key={genre.id}  className="px-6 py-2 hover:text-red-500 hover:bg-neutral-100">
-                          {genre.name}
-                      </Link>
-                    ))} */}
+                    {navBookActions?.map(
+                      (action: {
+                        path: string | UrlObject;
+                        id: React.Key | null | undefined;
+                        text:
+                          | string
+                          | number
+                          | boolean
+                          | React.ReactElement<
+                              any,
+                              string | React.JSXElementConstructor<any>
+                            >
+                          | Iterable<React.ReactNode>
+                          | React.ReactPortal
+                          | React.PromiseLikeOfReactNode
+                          | null
+                          | undefined;
+                      }) => (
+                        <Link
+                          href={action.path}
+                          key={action.id}
+                          className="px-6 py-2 hover:text-red-500 hover:bg-neutral-100"
+                        >
+                          {action.text}
+                        </Link>
+                      )
+                    )}
                   </div>
                 }
               />

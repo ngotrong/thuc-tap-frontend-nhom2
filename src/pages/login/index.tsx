@@ -28,7 +28,7 @@ function LoginPage() {
         })
         .catch((e) => console.log(e));
     }
-  }, []);
+  }, [dispatch, router]);
 
   const handleLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
