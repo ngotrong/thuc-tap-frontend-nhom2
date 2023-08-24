@@ -9,35 +9,35 @@ const GenreDetailPage = () => {
   const router = useRouter();
   const query = router.query;
   const genreName: string = String(query.genreName);
-  const filter = `{ "genre.name": "$ilike:${genreName?.split("-")?.[0]}"}`; // Tạo filter từ genre.id
-  // const queryStringified = queryString.stringify(filter); // Tạo query string từ filter
-
-  console.log(filter);
 
   const { data: genreData, error } = useSWR(
-    `http://localhost:8080/api/v1/audio-book?filter=${filter}`, // Sử dụng query string trong URL
+    `http://localhost:8080/api/v1/genre/search?search=${genreName
+      .split("-")
+      .join(" ")}`, // Sử dụng query string trong URL
     fetcher
   );
 
   if (error) {
-    return <div className="text-xl font-semibold pt-5">Có lỗi xảy ra khi tải dữ liệu.</div>;
+    return (
+      <div className="text-xl font-semibold pt-5">
+        Có lỗi xảy ra khi tải dữ liệu.
+      </div>
+    );
   }
 
   if (!genreData) {
-    return <div className="text-xl font-semibold pt-5">Đang tải dữ liệu...</div>;
+    return (
+      <div className="text-xl font-semibold pt-5">Đang tải dữ liệu...</div>
+    );
   }
 
-  const audiobooks = genreData?.data?.results;
-
-  // console.log(audiobooks);
-
-  console.log(router.query);
+  const genre = genreData?.data?.results;
 
   return (
     <div>
       <AudioBookSection
-        title={`Sách nói thể loại ${audiobooks?.[0]?.genre?.name}`}
-        data={audiobooks}
+        title={`Sách nói thể loại ${genre?.[0]?.name}`}
+        data={genre?.[0]?.audioBook}
       />
     </div>
   );
