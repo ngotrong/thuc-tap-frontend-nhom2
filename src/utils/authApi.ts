@@ -1,3 +1,10 @@
+import {
+  ApiResponse,
+  ILogin,
+  IRegister,
+  IToken,
+  IUser,
+} from "@/interfaces/interface";
 import Api from "./api";
 
 class AuthApi {

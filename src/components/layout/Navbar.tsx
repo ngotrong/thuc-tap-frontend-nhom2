@@ -26,7 +26,7 @@ export function convertViToEn(str: string, toUpperCase = false) {
 }
 
 function Navbar() {
-  const { data: genresData } = useSWR(
+  const { data: genresData, error } = useSWR(
     "http://localhost:8080/api/v1/genre",
     fetcher
   );

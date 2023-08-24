@@ -1,3 +1,4 @@
+import { ErrorResponse, ILogin, IUser } from "@/interfaces/interface";
 import authApi from "@/utils/authApi";
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 // import { ILogin } from '../../interfaces/auth.interface';

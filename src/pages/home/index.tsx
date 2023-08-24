@@ -23,7 +23,7 @@ function Home() {
   }, []);
 
   useEffect(() => {
-    genreApi.getListGenre({}).then((resp) => setGenres(resp.data.results));
+    genreApi.getListGenre({}).then((resp) => setGenres(resp?.data?.results));
   }, []);
 
   if (isLoading)

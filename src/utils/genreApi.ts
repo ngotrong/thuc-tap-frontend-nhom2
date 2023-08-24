@@ -1,3 +1,4 @@
+import { ApiListResponse, Query } from "@/interfaces/interface";
 import Api from "./api";
 
 class Genre {
