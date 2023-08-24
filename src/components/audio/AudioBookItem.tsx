@@ -19,12 +19,11 @@ const AudioBookItem = ({
     <div className="w-full h-full ">
       <Link href={`/audiobook/${audiobookId}`} className="relative">
         <Image
-          className={`w-full aspect-[198/297]`}
+          className={`w-full aspect-[198/297] object-cover`}
           width={198}
           height={297}
           src={imgSrc}
           alt={bookName}
-          objectFit="cover"
         />
         {!free ? (
           <div className="absolute top-0 left-0 bg-black text-white px-2 py-1 rounded">

@@ -5,6 +5,9 @@ import SearchInput from "../SearchInput/SearchInput";
 import Link from "next/link";
 import useSWR from "swr";
 import { fetcher } from "@/utils/api";
+import { useAppDispatch } from "@/redux/hooks";
+import { logout } from "@/redux/features/authSlice";
+import { useRouter } from "next/router";
 export function convertViToEn(str: string, toUpperCase = false) {
   str = str.toLowerCase().trim();
   str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
@@ -39,6 +42,9 @@ function Navbar() {
   if (!genresData) {
     return <div>Đang tải dữ liệu thể loại...</div>;
   }
+
+  const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const navBookActions = genresData.data.results.map((genre) => ({
     id: genre.id,
@@ -110,7 +116,7 @@ function Navbar() {
     {
       id: 2,
       text: "Đăng xuất",
-      path: "/logout",
+      path: "/login",
     },
   ];
 
@@ -187,7 +193,9 @@ function Navbar() {
                     {userActions.map((action) => (
                       <button
                         key={action.id}
-                        onClick={() => {}}
+                        onClick={() => {
+                          dispatch(logout()).then(() => router.push("/login"));
+                        }}
                         className="px-6 py-2 hover:text-red-500 hover:bg-neutral-100"
                       >
                         {action.text}
