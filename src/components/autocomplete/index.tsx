@@ -1,7 +1,5 @@
 import React, {
-  HTMLInputTypeAttribute,
   InputHTMLAttributes,
-  useMemo,
   useState,
 } from "react";
 import { ChevronDown } from "lucide-react";
@@ -27,15 +25,6 @@ const AutoComplete = ({ className, data, ...RestInputProps }: Props) => {
     setIsOpen(false);
     setValue(item);
   };
-
-  // const contentData = useMemo(() => {
-  //   return ["ds", "sadhu"];
-  //   return value
-  //     ? data.filter((item) =>
-  //         (item?.name as string).toLowerCase().includes(value.toLowerCase())
-  //       )
-  //     : data;
-  // }, [value]);
 
   return (
     <div

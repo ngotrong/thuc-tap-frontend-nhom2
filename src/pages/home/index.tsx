@@ -18,11 +18,6 @@ function Home() {
     genreApi.getListGenre({}).then((resp) => setGenres(resp.data.results));
   }, []);
 
-  // const { data, isLoading } = useSWR(
-  //   'https://2f75-14-232-135-216.ngrok-free.app/api/v1/audio-book',
-  //   fetcher
-  // );
-
   if (isLoading)
     return <div className="text-xl font-semibold pt-5">Loading...</div>;
 
@@ -47,10 +42,10 @@ function Home() {
             className="float-right"
             placeholder="Thể loại sách nói"
             data={
-              genres?.map((genre) => ({ id: genre.id, name: genre.name })) ?? [
-                "dags",
-                "dkaguh",
-              ]
+              genres?.map((genre: { id: any; name: any }) => ({
+                id: genre.id,
+                name: genre.name,
+              })) ?? []
             }
           />
         </div>
