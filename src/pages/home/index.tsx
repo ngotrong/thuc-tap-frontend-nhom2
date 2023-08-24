@@ -24,7 +24,7 @@ function Home() {
   if (isLoading)
     return <div className="text-xl font-semibold pt-5">Loading...</div>;
 
-  if (!data) return <div>Không có dữ liệu</div>;
+  if (!data) return <div className="text-xl font-semibold pt-5">Không có dữ liệu</div>;
 
   const kinhDoanhAudiobooks = data?.data?.results?.filter(
     (audiobook: { genre: { name: string; }; }) => audiobook.genre.name === "Kinh doanh"
@@ -63,13 +63,12 @@ function Home() {
         title="Sách nói nổi bật"
         subtitle="Sách nói nghe nhiều tuần qua, xem tất cả "
         data={data?.data?.results || []}
-        // data={data.data?.results}
       />
       <AudioBookSection
-        title="Sách nói Kỹ Năng Sống"
+        title="Sách nói kinh doanh"
         subtitle="Sách nói về kỹ năng sống, xem tất cả "
-        // data={data?.data?.results || []}
         data={kinhDoanhAudiobooks}
+        // data={data?.data?.results || []}
       />
     </div>
   );

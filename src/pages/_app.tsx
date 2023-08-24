@@ -23,9 +23,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
       <React.Fragment>{children}</React.Fragment>
     ));
 
-//console.log(Layout);
-  
-return (
+  return (
     <Provider>
       <div className="overflow-x-hidden">
         <Navbar />

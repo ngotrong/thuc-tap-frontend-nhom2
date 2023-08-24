@@ -36,7 +36,7 @@ function LoginPage() {
       if (data.meta.requestStatus == "rejected") {
         // @ts-ignore
         toast.error(data.error.message, toastOption);
-      } else router.push("/");
+      } else router.push("/home");
     });
   };
 
