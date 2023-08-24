@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Autocomplete from "@/components/autocomplete";
 import AppLayout from "@/components/layout/AppLayout";
 import AudioBookSection from "@/components/audio/AudioBookSection";
 import useSWR from "swr";
 import { fetcher } from "@/utils/api";
+import genreApi from "@/utils/genreApi";
 
 function Home() {
   const { data, isLoading } = useSWR(
@@ -11,10 +12,11 @@ function Home() {
     fetcher
   );
 
-  // const { data, isLoading } = useSWR(
-  //   "https://373d-14-232-135-216.ngrok-free.app/api/v1/audio-book",
-  //   fetcher
-  // );
+  const [genres, setGenres] = useState<any>([]);
+
+  useEffect(() => {
+    genreApi.getListGenre({}).then((resp) => setGenres(resp.data.results));
+  }, []);
 
   // const { data, isLoading } = useSWR(
   //   'https://2f75-14-232-135-216.ngrok-free.app/api/v1/audio-book',
@@ -24,10 +26,12 @@ function Home() {
   if (isLoading)
     return <div className="text-xl font-semibold pt-5">Loading...</div>;
 
-  if (!data) return <div className="text-xl font-semibold pt-5">Không có dữ liệu</div>;
+  if (!data)
+    return <div className="text-xl font-semibold pt-5">Không có dữ liệu</div>;
 
   const kinhDoanhAudiobooks = data?.data?.results?.filter(
-    (audiobook: { genre: { name: string; }; }) => audiobook.genre.name === "Kinh doanh"
+    (audiobook: { genre: { name: string } }) =>
+      audiobook.genre.name === "Kinh doanh"
   );
 
   return (
@@ -42,14 +46,12 @@ function Home() {
           <Autocomplete
             className="float-right"
             placeholder="Thể loại sách nói"
-            data={[
-              "Bất động sản",
-              "Chứng khoán",
-              "Kinh doanh",
-              "Kỹ năng sống",
-              "Phong thủy",
-              "Sức khỏe & Dinh Dưỡng",
-            ]}
+            data={
+              genres?.map((genre) => ({ id: genre.id, name: genre.name })) ?? [
+                "dags",
+                "dkaguh",
+              ]
+            }
           />
         </div>
       </div>
