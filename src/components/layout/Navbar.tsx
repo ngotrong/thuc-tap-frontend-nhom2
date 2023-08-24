@@ -5,6 +5,9 @@ import SearchInput from "../SearchInput/SearchInput";
 import Link from "next/link";
 import useSWR from "swr";
 import { fetcher } from "@/utils/api";
+import { useAppDispatch } from "@/redux/hooks";
+import { logout } from "@/redux/features/authSlice";
+import { useRouter } from "next/router";
 import { UrlObject } from "url";
 export function convertViToEn(str: string, toUpperCase = false) {
   str = str.toLowerCase().trim();
@@ -23,10 +26,13 @@ export function convertViToEn(str: string, toUpperCase = false) {
 }
 
 function Navbar() {
-  const { data: genresData} = useSWR(
+  const { data: genresData, error } = useSWR(
     "http://localhost:8080/api/v1/genre",
     fetcher
   );
+
+  const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const navBookActions = genresData?.data?.results.map(
     (genre: { id: any; name: string }) => ({
@@ -63,7 +69,7 @@ function Navbar() {
     {
       id: 2,
       text: "Đăng xuất",
-      path: "/logout",
+      path: "/login",
     },
   ];
 
@@ -87,15 +93,33 @@ function Navbar() {
                 text="Sách Nói"
                 Content={
                   <div className="flex flex-col">
-                    {navBookActions?.map((action: { path: string | UrlObject; id: React.Key | null | undefined; text: string | number | boolean | React.ReactElement<any, string | React.JSXElementConstructor<any>> | Iterable<React.ReactNode> | React.ReactPortal | React.PromiseLikeOfReactNode | null | undefined; }) => (
-                      <Link
-                        href={action.path}
-                        key={action.id}
-                        className="px-6 py-2 hover:text-red-500 hover:bg-neutral-100"
-                      >
-                        {action.text}
-                      </Link>
-                    ))}
+                    {navBookActions?.map(
+                      (action: {
+                        path: string | UrlObject;
+                        id: React.Key | null | undefined;
+                        text:
+                          | string
+                          | number
+                          | boolean
+                          | React.ReactElement<
+                              any,
+                              string | React.JSXElementConstructor<any>
+                            >
+                          | Iterable<React.ReactNode>
+                          | React.ReactPortal
+                          | React.PromiseLikeOfReactNode
+                          | null
+                          | undefined;
+                      }) => (
+                        <Link
+                          href={action.path}
+                          key={action.id}
+                          className="px-6 py-2 hover:text-red-500 hover:bg-neutral-100"
+                        >
+                          {action.text}
+                        </Link>
+                      )
+                    )}
                   </div>
                 }
               />
@@ -126,7 +150,9 @@ function Navbar() {
                     {userActions.map((action) => (
                       <button
                         key={action.id}
-                        onClick={() => {}}
+                        onClick={() => {
+                          dispatch(logout()).then(() => router.push("/login"));
+                        }}
                         className="px-6 py-2 hover:text-red-500 hover:bg-neutral-100"
                       >
                         {action.text}

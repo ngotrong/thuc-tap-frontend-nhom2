@@ -1,3 +1,4 @@
+import { ErrorResponse, ILogin, IUser } from "@/interfaces/interface";
 import authApi from "@/utils/authApi";
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 // import { ILogin } from '../../interfaces/auth.interface';
@@ -42,6 +43,7 @@ export const getMe = createAsyncThunk("users/get-me", async (_, thunkAPI) => {
 // );
 
 export const logout = createAsyncThunk("", async (_, thunkAPI) => {
+  await authApi.logout();
   return null;
 });
 
@@ -91,7 +93,6 @@ const authSlice = createSlice({
         state.currentUser = action.payload;
         state.accessToken = "";
         localStorage.clear();
-        //state.loading = LoadingStatus.Fulfilled;
       })
       .addMatcher(
         (action) => action.type.includes("rejected"),

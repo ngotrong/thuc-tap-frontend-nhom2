@@ -5,6 +5,7 @@ import AudioBookSection from "@/components/audio/AudioBookSection";
 import useSWR from "swr";
 import { fetcher } from "@/utils/api";
 import genreApi from "@/utils/genreApi";
+import { useRouter } from "next/router";
 
 function Home() {
   const { data, isLoading } = useSWR(
@@ -14,8 +15,15 @@ function Home() {
 
   const [genres, setGenres] = useState<any>([]);
 
+  const router = useRouter();
+
   useEffect(() => {
-    genreApi.getListGenre({}).then((resp) => setGenres(resp.data.results));
+    const token = localStorage.getItem("token");
+    if (!token) router.push("/login");
+  }, []);
+
+  useEffect(() => {
+    genreApi.getListGenre({}).then((resp) => setGenres(resp?.data?.results));
   }, []);
 
   if (isLoading)

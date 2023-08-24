@@ -20,7 +20,7 @@ function LoginPage() {
 
       dispatch(getMe())
         .then((resp: any) => {
-          if (resp.payload) router.push("/");
+          if (resp.payload) router.push("/home");
           else {
             dispatch(logout());
             toast.warn("Đã có lỗi xảy ra", toastOption);

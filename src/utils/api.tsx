@@ -3,16 +3,16 @@ export const fetcher = async (...args: any[]) => {
     // window.localStorage.getItem("token") ||
     // "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVhdiI6MTY5MjYzODY0Nzc5MywiaWF0IjoxNjkyNjM4NjQ3LCJleHAiOjE2OTM1MDI2NDd9.Fjprlbl_y414IftCkQrpHueUnKbUl5n4C4Wef5G-_Qc";
 
-    JSON.parse(
-      localStorage.getItem("token") ?? ""
-    )
+    JSON.parse(localStorage.getItem("token") ?? "");
 
   // @ts-ignore
   return fetch(...args, {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-  }).then((res) => res.json());
+  })
+    .then((res) => res.json())
+    .catch((e) => console.log(e));
 };
 
 import axios, {
