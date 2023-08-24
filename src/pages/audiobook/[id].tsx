@@ -57,13 +57,26 @@ const AudiobookDetailPage = () => {
 
               {audiobook?.url ? (
                 <ReactPlayer
-                  url={audiobook?.url}
-                  controls
-                  width="80%"
-                  height="40px"
-                  // playing={true}
-                  // loop={true}
-                />
+                    url={audiobook?.url}
+                    controls
+                    width='50%'
+                    height='40px'
+                    config={{
+                      file: {
+                        hlsOptions: {
+                          forceHLS: true,
+                          debug: false,
+                          xhrSetup: function (xhr: any, url: any) {
+                            xhr.setRequestHeader(
+                              'Authorization',
+                              `Bearer ${JSON.parse(localStorage.getItem("token") ?? "")}`,
+                            );
+                          },
+                        },
+                      },
+                    }}
+                  />
+
               ) : (
                 <Link href="#" className="">
                   Bạn cần nâng cấp vip để nghe

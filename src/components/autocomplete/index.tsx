@@ -2,6 +2,7 @@ import React, { InputHTMLAttributes, useState } from "react";
 import { ChevronDown } from "lucide-react";
 import clsx from "clsx";
 import { useRouter } from "next/router";
+import slugify from "slugify"; // Import the slugify library
 
 interface Props extends InputHTMLAttributes<any> {
   className?: string;
@@ -24,7 +25,8 @@ const AutoComplete = ({ className, data, placeholder, ...RestInputProps }: Props
     setSelected(item);
     setIsOpen(false);
     setValue(item);
-    router.push(`/genre/${item}`);
+    const slug = slugify(item, { lower: true }); // Create a slug from the item name
+    router.push(`/genre/${slug}`); // Redirect to genre page with slug
   };
 
   return (
