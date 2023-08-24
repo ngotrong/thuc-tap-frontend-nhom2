@@ -20,7 +20,7 @@ function Home() {
   useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) router.push("/login");
-  }, []);
+  }, [router]);
 
   useEffect(() => {
     genreApi.getListGenre({}).then((resp) => setGenres(resp?.data?.results));
@@ -35,6 +35,16 @@ function Home() {
   const kinhDoanhAudiobooks = data?.data?.results?.filter(
     (audiobook: { genre: { name: string } }) =>
       audiobook.genre.name === "Kinh doanh"
+  );
+
+  const trinhThamAudiobooks = data?.data?.results?.filter(
+    (audiobook: { genre: { name: string } }) =>
+      audiobook.genre.name === "Trinh thám"
+  );
+
+  const tieuThuyetAudiobooks = data?.data?.results?.filter(
+    (audiobook: { genre: { name: string } }) =>
+      audiobook.genre.name === "Tiểu thuyết"
   );
 
   return (
@@ -60,20 +70,20 @@ function Home() {
       </div>
 
       <AudioBookSection
-        title="Sách nói mới nhất"
-        subtitle="Sách nói mới cập nhật, xem tất cả "
-        data={data?.data?.results || []}
-      />
-      <AudioBookSection
-        title="Sách nói nổi bật"
+        title="Sách nói thể loại tiểu thuyết"
         subtitle="Sách nói nghe nhiều tuần qua, xem tất cả "
-        data={data?.data?.results || []}
+        data={tieuThuyetAudiobooks}
+        // data={data?.data?.results || []}
       />
       <AudioBookSection
-        title="Sách nói kinh doanh"
+        title="Sách nói thể loại kinh doanh"
         subtitle="Sách nói về kỹ năng sống, xem tất cả "
         data={kinhDoanhAudiobooks}
-        // data={data?.data?.results || []}
+      />
+      <AudioBookSection
+        title="Sách nói thể loại trinh thám"
+        subtitle="Sách nói mới cập nhật, xem tất cả "
+        data={trinhThamAudiobooks}
       />
     </div>
   );

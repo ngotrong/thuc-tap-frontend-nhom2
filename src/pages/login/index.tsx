@@ -6,6 +6,7 @@ import { getMe, logout, requestLogin } from "@/redux/features/authSlice";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import api from "@/utils/api";
+import Image from "next/image";
 
 function LoginPage() {
   const router = useRouter();
@@ -47,8 +48,10 @@ function LoginPage() {
   return (
     <section className="flex flex-col md:flex-row h-[90vh] items-center w-[90%]">
       <div className="bg-indigo-600 hidden lg:block w-full md:w-1/2 xl:w-2/3 h-[80%]">
-        <img
-          src="https://c.wallhere.com/photos/0f/f2/4083x2756_px_Adagaki_Aki_Anime_Girls_kun_no_Revenge_Masamune-1182172.jpg!d"
+        <Image
+          width={800}
+          height={800}
+          src="https://previews.123rf.com/images/virtosmedia/virtosmedia2302/virtosmedia230230887/198625662-audiobook-concept-with-headphones-and-books-on-turquoise-background.jpg"
           alt=""
           className="w-full h-full object-cover"
         />

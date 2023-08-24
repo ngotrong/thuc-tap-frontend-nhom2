@@ -7,6 +7,8 @@ const nextConfig = {
       "cloudflare-ipfs.com",
       "192.168.1.8",
       "192.168.56.1",
+      "c.wallhere.com",
+      "previews.123rf.com",
     ],
   },
 };

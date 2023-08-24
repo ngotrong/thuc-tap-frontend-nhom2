@@ -5,13 +5,13 @@ import useSWR from "swr";
 import { fetcher } from "@/utils/api";
 import AppLayout from "@/components/layout/AppLayout";
 
-const GenreDetailPage = () => {
+const AuthorDetailPage = () => {
   const router = useRouter();
   const query = router.query;
-  const genreName: string = String(query.genreName);
+  const authorName: string = String(query.authorName);
 
-  const { data: genreData, error } = useSWR(
-    `http://localhost:8080/api/v1/genre/search?search=${genreName
+  const { data: authorData, error } = useSWR(
+    `http://localhost:8080/api/v1/author/search?search=${authorName
       .split("-")
       .join(" ")}`, // Sử dụng query string trong URL
     fetcher
@@ -25,24 +25,24 @@ const GenreDetailPage = () => {
     );
   }
 
-  if (!genreData) {
+  if (!authorData) {
     return (
       <div className="text-xl font-semibold pt-5">Đang tải dữ liệu...</div>
     );
   }
 
-  const genre = genreData?.data?.results;
+  const author = authorData?.data?.results;
 
   return (
     <div>
       <AudioBookSection
-        title={`Sách nói thể loại ${genre?.[0]?.name}`}
-        data={genre?.[0]?.audioBook}
+        title={`Sách nói tác giả ${author?.[0]?.name}`}
+        data={author?.[0]?.audioBook}
       />
     </div>
   );
 };
 
-GenreDetailPage.getLayout = AppLayout;
+AuthorDetailPage.getLayout = AppLayout;
 
-export default GenreDetailPage;
+export default AuthorDetailPage;

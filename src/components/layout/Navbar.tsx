@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { BookCopy, User2 } from "lucide-react";
 import Popover from "../popover";
 import SearchInput from "../SearchInput/SearchInput";
@@ -26,12 +26,18 @@ export function convertViToEn(str: string, toUpperCase = false) {
 }
 
 function Navbar() {
-  const { data: genresData, error } = useSWR(
+  const { data: genresData, error: genresError } = useSWR(
     "http://localhost:8080/api/v1/genre",
     fetcher
   );
 
+  if (genresError) {
+    return <div>Có lỗi xảy ra khi tải dữ liệu thể loại.</div>;
+  }
+
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const dispatch = useAppDispatch();
+  // eslint-disable-next-line react-hooks/rules-of-hooks
   const router = useRouter();
 
   const navBookActions = genresData?.data?.results.map(
@@ -45,17 +51,17 @@ function Navbar() {
   const navAuthorActions = [
     {
       id: 1,
-      text: "Nguyên Phong",
+      text: "Kim Dung",
       path: "/all",
     },
     {
       id: 2,
-      text: "Nguyễn Nhật Ánh",
+      text: "Robert Kiyosaki",
       path: "/all",
     },
     {
       id: 3,
-      text: "Thích Nhất Hạnh",
+      text: "Agatha Christie",
       path: "/all",
     },
   ];
@@ -64,7 +70,7 @@ function Navbar() {
     {
       id: 1,
       text: "Trang cá nhân",
-      path: "/user-profile",
+      path: "/profile",
     },
     {
       id: 2,
@@ -151,7 +157,13 @@ function Navbar() {
                       <button
                         key={action.id}
                         onClick={() => {
-                          dispatch(logout()).then(() => router.push("/login"));
+                          if (action.id == 1) {
+                            router.push("/profile");
+                          } else if (action.id == 2) {
+                            dispatch(logout()).then(() =>
+                              router.push("/login")
+                            );
+                          }
                         }}
                         className="px-6 py-2 hover:text-red-500 hover:bg-neutral-100"
                       >
