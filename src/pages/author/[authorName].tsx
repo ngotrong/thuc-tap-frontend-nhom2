@@ -36,7 +36,7 @@ const AuthorDetailPage = () => {
   return (
     <div>
       <AudioBookSection
-        title={`Sách nói tác giả ${author?.[0]?.name}`}
+        title={`Sách nói của tác giả ${author?.[0]?.name}`}
         data={author?.[0]?.audioBook}
       />
     </div>

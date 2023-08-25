@@ -52,17 +52,17 @@ function Navbar() {
     {
       id: 1,
       text: "Kim Dung",
-      path: "/all",
+      path: "/author/kim-dung",
     },
     {
       id: 2,
       text: "Robert Kiyosaki",
-      path: "/all",
+      path: "/author/robert-kiyosaki",
     },
     {
       id: 3,
       text: "Agatha Christie",
-      path: "/all",
+      path: "/author/agatha-christie",
     },
   ];
 
@@ -134,13 +134,13 @@ function Navbar() {
                 Content={
                   <div className="flex flex-col">
                     {navAuthorActions.map((action) => (
-                      <button
+                      <Link
+                        href={action.path}
                         key={action.id}
-                        onClick={() => {}}
                         className="px-6 py-2 hover:text-red-500 hover:bg-neutral-100"
                       >
                         {action.text}
-                      </button>
+                      </Link>
                     ))}
                   </div>
                 }
