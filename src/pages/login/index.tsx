@@ -1,17 +1,19 @@
 import React, { FormEvent, useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { toastOption } from "@/configs/notification.config";
-import { useAppDispatch } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { getMe, logout, requestLogin } from "@/redux/features/authSlice";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import api from "@/utils/api";
 import Image from "next/image";
+import { RootState } from "@/redux/store";
 
 function LoginPage() {
   const router = useRouter();
   const [dataLogin, setDataLogin] = useState({ email: "", password: "" });
   const dispatch = useAppDispatch();
+  const user = useAppSelector((state: RootState)=> state.auth.currentUser)
 
   useEffect(() => {
     const { accessToken } = router.query;
@@ -30,6 +32,10 @@ function LoginPage() {
         .catch((e) => console.log(e));
     }
   }, [dispatch, router]);
+
+  useEffect(()=> {
+    if(user) router.push('/home')
+  }, [])
 
   const handleLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

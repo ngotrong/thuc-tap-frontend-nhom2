@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { BookCopy, User2 } from "lucide-react";
 import Popover from "../popover";
 import SearchInput from "../SearchInput/SearchInput";

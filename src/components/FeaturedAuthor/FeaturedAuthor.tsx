@@ -1,7 +1,7 @@
 import React from 'react';
 
 const FeaturedAuthor = () => {
-  const authors = ['Nguyên Phong', 'Nguyễn Nhật Ánh', 'Thích Nhất Hạnh'];
+  const authors = ['Kim Dung', 'Robert Kiyosaki', 'Agatha Christie'];
 
   return (
     <div>

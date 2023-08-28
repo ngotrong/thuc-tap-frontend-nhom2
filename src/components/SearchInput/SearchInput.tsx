@@ -44,7 +44,7 @@ const SearchInput: React.FC = () => {
     const audiobook = bookData?.data?.results?.find(
       (book: { id: string }) => book.id === selectedAudiobook.id
     );
-    setSelectedProfile({ ...selectedAudiobook, audiobook }); // Lưu cả audiobook được chọn vào selectedProfile
+    setSelectedProfile({ ...selectedAudiobook, audiobook }); // Lưu các audiobook được chọn vào selectedProfile
     router.push(`/audiobook/${selectedAudiobook.id}`);
   };
 

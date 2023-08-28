@@ -6,6 +6,7 @@ interface Props {
   title: string;
   subtitle?: string;
   data: any[];
+  
 }
 
 const AudioBookSection = ({ title, subtitle, data }: Props) => {
@@ -38,6 +39,7 @@ const AudioBookSection = ({ title, subtitle, data }: Props) => {
                   bookName={book.title}
                   author={book.author}
                   audiobookId={book.id}
+                  free = {book.free}
                 />
               </Link>
             </div>

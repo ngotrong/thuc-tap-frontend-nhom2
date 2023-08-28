@@ -17,7 +17,6 @@ export const fetcher = async (...args: any[]) => {
 
 import axios, {
   AxiosInstance,
-  AxiosRequestConfig,
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from "axios";
@@ -109,4 +108,5 @@ class Api {
   }
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default new Api();
