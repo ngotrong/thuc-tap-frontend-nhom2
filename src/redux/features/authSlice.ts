@@ -1,4 +1,4 @@
-import { ErrorResponse, ILogin, IUser } from "@/interfaces/interface";
+import { ErrorResponse, ILogin, IRegister, IUser } from "@/interfaces/interface";
 import authApi from "@/utils/authApi";
 import { createAsyncThunk, createSlice, current } from "@reduxjs/toolkit";
 // import { ILogin } from '../../interfaces/auth.interface';
@@ -14,6 +14,16 @@ export const requestLogin = createAsyncThunk(
 
     if (!response.success) throw response.message;
     localStorage.setItem("token", JSON.stringify(response.data?.accessToken));
+    return response.data;
+  }
+);
+
+export const requestRegister = createAsyncThunk(
+  "auth/register",
+  async (input: IRegister, thunkAPI) => {
+    const response = await authApi.register(input);
+
+    if (!response.success) throw response.message;
     return response.data;
   }
 );

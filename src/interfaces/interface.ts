@@ -60,12 +60,14 @@ export interface ApiListResponse<T> {
 export interface ILogin {
   email: string;
   password: string;
+  username?: string;
 }
 
 export interface IRegister {
+  username: string;
   email: string;
   password: string;
-  rePassword?: string;
+  repassword?: string;
 }
 
 export interface IToken {

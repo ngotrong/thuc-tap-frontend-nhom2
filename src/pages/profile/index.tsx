@@ -44,25 +44,6 @@ function Profile() {
           readOnly // Set the readOnly attribute
         />
       </div>
-      {/* <div className="mb-4">
-        <label htmlFor="password" className="block text-gray-700 font-medium mb-1">
-          Password <span className="text-red-500">*</span>
-        </label>
-        <input
-          type={showPassword ? "text" : "password"}
-          id="password"
-          className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button
-          type="button"
-          className="text-blue-500 mt-1 focus:outline-none"
-          onClick={() => setShowPassword(!showPassword)}
-        >
-          {showPassword ? "Ẩn" : "Hiển thị"}
-        </button>
-      </div> */}
       <div className="mb-4">
         <label htmlFor="phone" className="block text-gray-700 font-medium mb-1">
           Phone
