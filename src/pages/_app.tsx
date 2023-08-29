@@ -2,6 +2,7 @@ import React, { PropsWithChildren, ReactElement, useEffect } from "react";
 import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import "@/styles/globals.css";
+
 import type { AppProps } from "next/app";
 import { NextPage } from "next";
 import "react-toastify/dist/ReactToastify.css";
@@ -27,8 +28,8 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const router = useRouter();
   const currentUrl = router.asPath;
 
-  console.log(currentUrl);
-  const isLayout = currentUrl != "/login" && currentUrl != "/register";
+  const isLayout =
+    currentUrl.includes("/login") && currentUrl.includes("/register");
 
   return (
     <Provider>
