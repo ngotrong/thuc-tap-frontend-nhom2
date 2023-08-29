@@ -20,24 +20,6 @@ function RegisterPage() {
   });
   const dispatch = useAppDispatch();
 
-  const [isModalOpen, setIsModalOpen] = useState(true);
-
-  const showModal = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
-  const onChange = (value: number) => {
-    console.log("changed", value);
-  };
-
   const handleRegister = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (dataRegister.password != dataRegister.repassword) {
@@ -53,22 +35,27 @@ function RegisterPage() {
       })
       .then((resp) => {
         if (!resp.success) throw resp.message;
-        setIsModalOpen(true);
         return resp;
+      })
+      .then((resp) => {
+        if (!resp.success) throw resp.message;
+        router.push(
+          `/login?email=${dataRegister.email}&accessToken=${resp.data.accessToken}`
+        );
+        // dispatch(
+        //   requestLogin({
+        //     email: dataRegister.email,
+        //     password: dataRegister.password,
+        //   })
+        // )
+        //   .unwrap()
+        //   .then(() => {
+        //     router.push("/home");
+        //   });
+      })
+      .catch((e) => {
+        toast.error(e.message, toastOption);
       });
-    //   .then((resp) => {
-    //     if (!resp.success) throw resp.message;
-    //     dispatch(
-    //       requestLogin({
-    //         email: dataRegister.email,
-    //         password: dataRegister.password,
-    //       })
-    //     )
-    //       .unwrap()
-    //       .then(() => {
-    //         router.push("/home");
-    //       });
-    //   });
   };
 
   const getOauthGoogleUrl = () => {
@@ -264,14 +251,6 @@ function RegisterPage() {
           </div>
         </div>
       </section>
-      {/* <Modal
-        title="Active User"
-        open={true}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        <InputNumber min={1} max={10} defaultValue={3} onChange={onChange} />
-      </Modal> */}
     </>
   );
 }
