@@ -35,7 +35,7 @@ function LoginPage() {
 
   useEffect(()=> {
     if(user) router.push('/home')
-  }, [])
+  }, [router, user])
 
   const handleLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();

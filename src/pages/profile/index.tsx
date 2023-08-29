@@ -27,9 +27,9 @@ function Profile() {
         <input
           type="text"
           id="fullName"
-          className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="bg-gray-200 w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           value={user?.username??''}
-          onChange={(e) => setFullName(e.target.value)}
+          disabled
         />
       </div>
       <div className="mb-4">
@@ -39,9 +39,9 @@ function Profile() {
         <input
           type="text"
           id="username"
-          className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="bg-gray-200 w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           value={user?.email??''}
-          readOnly // Set the readOnly attribute
+          disabled
         />
       </div>
       <div className="mb-4">
@@ -51,9 +51,9 @@ function Profile() {
         <input
           type="text"
           id="phone"
-          className="w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="bg-gray-200 w-full p-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           value={user?.phone??''}
-          onChange={(e) => setPhone(e.target.value)}
+          disabled
         />
       </div>
       <button

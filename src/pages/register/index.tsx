@@ -264,14 +264,14 @@ function RegisterPage() {
           </div>
         </div>
       </section>
-      <Modal
+      {/* <Modal
         title="Active User"
         open={true}
         onOk={handleOk}
         onCancel={handleCancel}
       >
-        {/* <InputNumber min={1} max={10} defaultValue={3} onChange={onChange} /> */}
-      </Modal>
+        <InputNumber min={1} max={10} defaultValue={3} onChange={onChange} />
+      </Modal> */}
     </>
   );
 }
