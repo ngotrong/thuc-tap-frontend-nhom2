@@ -202,7 +202,7 @@ const AudiobookDetailPage = () => {
                   }}
                 />
               ) : (
-                <Link href="#" className="">
+                <Link href="/package" className="">
                   Bạn cần nâng cấp vip để nghe
                 </Link>
               )}

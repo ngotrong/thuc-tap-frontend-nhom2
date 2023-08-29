@@ -10,6 +10,7 @@ const nextConfig = {
       "172.19.201.147",
       "c.wallhere.com",
       "previews.123rf.com",
+      "fintech.smartosc.com",
     ],
   },
 };
