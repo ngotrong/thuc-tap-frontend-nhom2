@@ -24,14 +24,6 @@ function LoginPage() {
     setIsModalOpen(true);
   };
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
-
   useEffect(() => {
     localStorage.clear();
     const { accessToken, email } = router.query;
@@ -48,8 +40,7 @@ function LoginPage() {
           }
         })
         .catch((e) => console.log(e));
-    } else {
-      console.log(router.query);
+    } else if (email) {
       showModal();
     }
   }, [dispatch, router]);
