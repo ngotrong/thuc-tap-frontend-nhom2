@@ -29,7 +29,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
   const currentUrl = router.asPath;
 
   const isLayout =
-    currentUrl.includes("/login") && currentUrl.includes("/register");
+    !(currentUrl.includes("/login") || currentUrl.includes("/register"))
 
   return (
     <Provider>
