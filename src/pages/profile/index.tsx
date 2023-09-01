@@ -6,7 +6,6 @@ function Profile() {
   const [fullName, setFullName] = useState("");
   const [password, setPassword] = useState("");
   const [phone, setPhone] = useState("");
-  const [showPassword, setShowPassword] = useState(false);
 
   const handleSave = () => {
     // Implement your save logic here
