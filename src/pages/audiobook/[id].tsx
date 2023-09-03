@@ -240,7 +240,7 @@ const AudiobookDetailPage = () => {
                   }}
                 />
               ) : (
-                <Link href="/package" className="">
+                <Link href="/package" className="border hover:text-black hover:bg-white rounded-[12px] p-3">
                   Bạn cần nâng cấp vip để nghe
                 </Link>
               )}

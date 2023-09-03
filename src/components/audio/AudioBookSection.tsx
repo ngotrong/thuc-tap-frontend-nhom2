@@ -7,7 +7,7 @@ interface Props {
   // subtitle?: string;
   subtitle?: React.ReactNode;
   data: any[];
-  genreName?: string
+  genreName?: string;
 }
 
 const AudioBookSection = ({ title, subtitle, data, genreName }: Props) => {

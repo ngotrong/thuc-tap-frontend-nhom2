@@ -37,7 +37,7 @@ const PaymentPage = () => {
   const pack = packageData?.data?.results?.[0];
 
   const totalPayment = (
-    pack.amount -
+    pack?.amount -
     (pack.amount * pack.discount) / 100
   ).toLocaleString('vi', {
     style: 'currency',
@@ -118,7 +118,7 @@ const PaymentPage = () => {
               disabled
             />
             <div className="mt-2 mb-4 text-lg font-semibold text-red-500">
-              Giá gói cước: {totalPayment}{' '}
+              Giá gói cước: {totalPayment}
               VNĐ
             </div>
             <button

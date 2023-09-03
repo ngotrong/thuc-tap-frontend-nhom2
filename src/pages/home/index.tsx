@@ -74,17 +74,16 @@ function Home() {
         subtitle="Sách nói tiểu thuyết, xem tất cả "
         data={tieuThuyetAudiobooks}
         genreName="tieu-thuyet"
-        // data={data?.data?.results || []}
       />
       <AudioBookSection
         title="Sách nói thể loại kinh doanh"
-        subtitle="Sách nói về kỹ năng sống, xem tất cả "
+        subtitle="Sách nói kinh doanh, xem tất cả "
         data={kinhDoanhAudiobooks}
         genreName="kinh-doanh"
       />
       <AudioBookSection
         title="Sách nói thể loại trinh thám"
-        subtitle="Sách nói mới cập nhật, xem tất cả "
+        subtitle="Sách nói trinh thám, xem tất cả "
         data={trinhThamAudiobooks}
         genreName="trinh-tham"
       />

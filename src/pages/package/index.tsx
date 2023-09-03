@@ -41,7 +41,7 @@ const PackagePage = () => {
             <div className='flex items-center justify-between'>
               <div className="text-lg font-semibold">{pkg.title}</div>
               {pkg.discount > 0 && (
-                <div className="text-sm text-green-500">
+                <div className="text-base text-green-500">
                   {pkg.discount}% giảm giá
                 </div>
               )}
@@ -58,7 +58,7 @@ const PackagePage = () => {
               {new Intl.NumberFormat('vi-VN', {
                 style: 'currency',
                 currency: 'VND',
-              }).format(pkg.amount)}
+              }).format(pkg.amount).slice(0, -1)}{'VNĐ'}
             </div>
             {/* Tạo URL có tham số dựa trên ID của gói cước */}
             <Link
