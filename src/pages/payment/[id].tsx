@@ -1,15 +1,15 @@
-import React, { useState } from "react";
-import AppLayout from "@/components/layout/AppLayout";
-import { useAppSelector } from "@/redux/hooks";
-import { RootState } from "@/redux/store";
-import useSWR from "swr";
-import { useRouter } from "next/router";
-import { fetcher } from "@/utils/api";
-import paymentApi from "@/utils/paymentApi";
+import React, { useMemo, useState } from 'react';
+import AppLayout from '@/components/layout/AppLayout';
+import { useAppSelector } from '@/redux/hooks';
+import { RootState } from '@/redux/store';
+import useSWR from 'swr';
+import { useRouter } from 'next/router';
+import { fetcher } from '@/utils/api';
+import paymentApi from '@/utils/paymentApi';
 // import { redirect } from "next/navigation";
 
 const PaymentPage = () => {
-  const [paymentMethod, setPaymentMethod] = useState("momo");
+  const [paymentMethod, setPaymentMethod] = useState('momo');
   const user = useAppSelector((state: RootState) => state.auth.currentUser);
   const router = useRouter();
   const { id } = router.query;
@@ -22,7 +22,7 @@ const PaymentPage = () => {
 
   if (error) {
     return (
-      <div className="text-xl font-semibold pt-5">
+      <div className="pt-5 text-xl font-semibold">
         Có lỗi xảy ra khi tải dữ liệu.
       </div>
     );
@@ -30,11 +30,19 @@ const PaymentPage = () => {
 
   if (!packageData) {
     return (
-      <div className="text-xl font-semibold pt-5">Đang tải dữ liệu...</div>
+      <div className="pt-5 text-xl font-semibold">Đang tải dữ liệu...</div>
     );
   }
 
   const pack = packageData?.data?.results?.[0];
+
+  const totalPayment = (
+    pack.amount -
+    (pack.amount * pack.discount) / 100
+  ).toLocaleString('vi', {
+    style: 'currency',
+    currency: 'VND',
+  }).slice(0, -1);
 
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
@@ -68,8 +76,8 @@ const PaymentPage = () => {
             id="momo"
             name="paymentMethod"
             value="momo"
-            checked={paymentMethod === "momo"}
-            onChange={() => setPaymentMethod("momo")}
+            checked={paymentMethod === 'momo'}
+            onChange={() => setPaymentMethod('momo')}
           />
           <label htmlFor="momo" className="ml-2 cursor-pointer">
             MoMo
@@ -81,8 +89,8 @@ const PaymentPage = () => {
             id="vnpay"
             name="paymentMethod"
             value="vnpay"
-            checked={paymentMethod === "vnpay"}
-            onChange={() => setPaymentMethod("vnpay")}
+            checked={paymentMethod === 'vnpay'}
+            onChange={() => setPaymentMethod('vnpay')}
           />
           <label htmlFor="vnpay" className="ml-2 cursor-pointer">
             VNPAY
@@ -98,24 +106,24 @@ const PaymentPage = () => {
             <input
               type="text"
               placeholder="Họ tên người thanh toán"
-              className="bg-gray-200 mt-2 px-4 py-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
-              value={user?.username ?? ""}
+              className="w-full px-4 py-2 mt-2 bg-gray-200 border rounded-md focus:outline-none focus:border-blue-500"
+              value={user?.username ?? ''}
               disabled
             />
             <input
               type="email"
               placeholder="Email"
-              className="bg-gray-200 mt-2 px-4 py-2 w-full border rounded-md focus:outline-none focus:border-blue-500"
-              value={user?.email ?? ""}
+              className="w-full px-4 py-2 mt-2 bg-gray-200 border rounded-md focus:outline-none focus:border-blue-500"
+              value={user?.email ?? ''}
               disabled
             />
-            <div className="text-lg font-semibold text-red-500 mt-2 mb-4">
-              Giá gói cước: {pack.amount - (pack.amount * pack.discount) / 100}{" "}
+            <div className="mt-2 mb-4 text-lg font-semibold text-red-500">
+              Giá gói cước: {totalPayment}{' '}
               VNĐ
             </div>
             <button
               type="submit"
-              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300"
+              className="px-4 py-2 text-white transition duration-300 bg-blue-500 rounded-md hover:bg-blue-600"
             >
               Xác nhận thanh toán
             </button>
