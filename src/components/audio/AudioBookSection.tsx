@@ -4,13 +4,14 @@ import Link from "next/link";
 
 interface Props {
   title: string;
-  subtitle?: string;
+  // subtitle?: string;
+  subtitle?: React.ReactNode;
   data: any[];
-  
 }
 
 const AudioBookSection = ({ title, subtitle, data }: Props) => {
   console.log(subtitle);
+  const genreName = subtitle;
 
   return (
     <>
@@ -21,7 +22,7 @@ const AudioBookSection = ({ title, subtitle, data }: Props) => {
         <p className="mt-2">
           {subtitle}
           {subtitle ? (
-            <Link href="/audiobook" className="text-blue-700 cursor-pointer">
+            <Link href={`/audiobook/genre/${genreName}`} className="text-blue-700 cursor-pointer">
               tại đây
             </Link>
           ) : (
@@ -39,7 +40,7 @@ const AudioBookSection = ({ title, subtitle, data }: Props) => {
                   bookName={book.title}
                   author={book.author}
                   audiobookId={book.id}
-                  free = {book.free}
+                  free={book.free}
                 />
               </Link>
             </div>

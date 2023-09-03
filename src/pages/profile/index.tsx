@@ -3,9 +3,9 @@ import { RootState } from "@/redux/store";
 import React, { useState } from "react";
 
 function Profile() {
-  const [fullName, setFullName] = useState("");
-  const [password, setPassword] = useState("");
-  const [phone, setPhone] = useState("");
+  // const [fullName, setFullName] = useState("");
+  // const [password, setPassword] = useState("");
+  // const [phone, setPhone] = useState("");
 
   const handleSave = () => {
     // Implement your save logic here
