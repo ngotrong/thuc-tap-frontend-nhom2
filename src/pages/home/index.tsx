@@ -71,7 +71,7 @@ function Home() {
 
       <AudioBookSection
         title="Sách nói thể loại tiểu thuyết"
-        subtitle="Sách nói nghe nhiều tuần qua, xem tất cả dsfjldsfkghjlksdfjghsdhlkjgjldskgjdlkg"
+        subtitle="Sách nói tiểu thuyết, xem tất cả "
         data={tieuThuyetAudiobooks}
         genreName="tieu-thuyet"
         // data={data?.data?.results || []}
