@@ -1,8 +1,9 @@
-import React, { InputHTMLAttributes, useState } from "react";
-import { ChevronDown } from "lucide-react";
-import clsx from "clsx";
-import { useRouter } from "next/router";
-import slugify from "slugify"; // Import the slugify library
+import React, { InputHTMLAttributes, useState } from 'react';
+import { ChevronDown } from 'lucide-react';
+import clsx from 'clsx';
+import { useRouter } from 'next/router';
+import slugify from 'slugify'; // Import the slugify library
+import shochu from 'shochu';
 
 interface Props extends InputHTMLAttributes<any> {
   className?: string;
@@ -10,9 +11,14 @@ interface Props extends InputHTMLAttributes<any> {
   placeholder: string;
 }
 
-const AutoComplete = ({ className, data, placeholder, ...RestInputProps }: Props) => {
+const AutoComplete = ({
+  className,
+  data,
+  placeholder,
+  ...RestInputProps
+}: Props) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState('');
   const [selected, setSelected] = useState<null | string>(null);
   const router = useRouter();
 
@@ -25,12 +31,17 @@ const AutoComplete = ({ className, data, placeholder, ...RestInputProps }: Props
     setSelected(item);
     setIsOpen(false);
     setValue(item);
-    const slug = slugify(item, { lower: true }); // Create a slug from the item name
+    const slug = shochu.stringFn.rmDicretics(item).toLowerCase().split(' ').join('-');
     router.push(`/genre/${slug}`); // Redirect to genre page with slug
   };
 
   return (
-    <div className={clsx("relative border rounded-md h-[40px] w-[200px]", className)}>
+    <div
+      className={clsx(
+        'relative border rounded-md h-[40px] w-[200px]',
+        className
+      )}
+    >
       <div className="flex items-center justify-between w-full h-full px-2">
         <input
           onClick={() => setIsOpen(true)}
@@ -50,9 +61,9 @@ const AutoComplete = ({ className, data, placeholder, ...RestInputProps }: Props
               key={item.id}
               onMouseDown={(event) => handleOnSelected(event, item.name, index)}
               className={`px-4 py-2 cursor-pointer rounded-md ${
-                item.name === selected ? "bg-blue-200" : "bg-white"
+                item.name === selected ? 'bg-blue-200' : 'bg-white'
               } hover:bg-neutral-100 ${
-                item.name === selected ? "font-medium" : "font-normal"
+                item.name === selected ? 'font-medium' : 'font-normal'
               }`}
             >
               {item.name}

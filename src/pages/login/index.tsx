@@ -1,24 +1,24 @@
-import React, { FormEvent, useEffect, useState } from "react";
-import { toast } from "react-toastify";
-import { toastOption } from "@/configs/notification.config";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { getMe, logout, requestLogin } from "@/redux/features/authSlice";
-import Link from "next/link";
-import { useRouter } from "next/router";
-import api from "@/utils/api";
-import Image from "next/image";
-import { RootState } from "@/redux/store";
-import { Button, FloatButton, Input, Modal, Space } from "antd";
-import OTPInput from "react-otp-input";
+import React, { FormEvent, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
+import { toastOption } from '@/configs/notification.config';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { getMe, logout, requestLogin } from '@/redux/features/authSlice';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import api from '@/utils/api';
+import Image from 'next/image';
+import { RootState } from '@/redux/store';
+import { Button, FloatButton, Input, Modal, Space } from 'antd';
+import OTPInput from 'react-otp-input';
 
 function LoginPage() {
   const router = useRouter();
-  const [dataLogin, setDataLogin] = useState({ email: "", password: "" });
+  const [dataLogin, setDataLogin] = useState({ email: '', password: '' });
   const dispatch = useAppDispatch();
   const user = useAppSelector((state: RootState) => state.auth.currentUser);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [otp, setOtp] = useState("");
+  const [otp, setOtp] = useState('');
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -29,38 +29,40 @@ function LoginPage() {
     const { accessToken, email } = router.query;
 
     if (accessToken && !email) {
-      localStorage.setItem("token", JSON.stringify(accessToken));
+      localStorage.setItem('token', JSON.stringify(accessToken));
 
       dispatch(getMe())
         .then((resp: any) => {
-          if (resp.payload) router.push("/home");
+          if (resp.payload) router.push('/home');
           else {
             dispatch(logout());
-            toast.warn("Đã có lỗi xảy ra", toastOption);
+            toast.warn('Đã có lỗi xảy ra', toastOption);
           }
         })
         .catch((e) => console.log(e));
     } else if (email) {
       showModal();
     }
-  }, [dispatch, router]);
 
-  useEffect(() => {
-    if (user) router.push("/home");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // useEffect(() => {
+  //   if (user) router.push('/home');
+  // }, []);
 
   const handleLogin = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(requestLogin(dataLogin)).then((data) => {
-      if (data.meta.requestStatus == "rejected") {
+      if (data.meta.requestStatus == 'rejected') {
         // @ts-ignore
         toast.error(data.error.message, toastOption);
-      } else router.push("/home");
+      } else router.push('/home');
     });
   };
 
   const getOauthGoogleUrl = () => {
-    return api.getBaseUrl() + "/auth/google";
+    return api.getBaseUrl() + '/auth/google';
   };
 
   return (
@@ -72,13 +74,13 @@ function LoginPage() {
             height={800}
             src="https://previews.123rf.com/images/virtosmedia/virtosmedia2302/virtosmedia230230887/198625662-audiobook-concept-with-headphones-and-books-on-turquoise-background.jpg"
             alt=""
-            className="w-full h-full object-cover"
+            className="object-cover w-full h-full"
           />
         </div>
 
-        <div className="bg-white w-full md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 px-6 lg:px-16 xl:px-12 flex items-center justify-center">
+        <div className="flex items-center justify-center w-full px-6 bg-white md:max-w-md lg:max-w-full md:mx-auto md:w-1/2 xl:w-1/3 lg:px-16 xl:px-12">
           <div className="w-full h-100">
-            <h1 className="text-xl md:text-2xl font-bold leading-tight mt-12">
+            <h1 className="mt-12 text-xl font-bold leading-tight md:text-2xl">
               Log in to your account
             </h1>
 
@@ -89,7 +91,7 @@ function LoginPage() {
                   type="email"
                   name="email"
                   placeholder="Enter Email Address"
-                  className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
+                  className="w-full px-4 py-3 mt-2 bg-gray-200 border rounded-lg focus:border-blue-500 focus:bg-white focus:outline-none"
                   autoFocus
                   autoComplete=""
                   required
@@ -109,7 +111,7 @@ function LoginPage() {
                   name="password"
                   placeholder="Enter Password"
                   minLength={6}
-                  className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-blue-500 focus:bg-white focus:outline-none"
+                  className="w-full px-4 py-3 mt-2 bg-gray-200 border rounded-lg focus:border-blue-500 focus:bg-white focus:outline-none"
                   required
                   onChange={(e) => {
                     setDataLogin({
@@ -120,7 +122,7 @@ function LoginPage() {
                 />
               </div>
 
-              <div className="text-right mt-2">
+              <div className="mt-2 text-right">
                 <a
                   href="#"
                   className="text-sm font-semibold text-gray-700 hover:text-blue-700 focus:text-blue-700"
@@ -131,13 +133,13 @@ function LoginPage() {
 
               <button
                 type="submit"
-                className="w-full block bg-indigo-500 hover:bg-indigo-400 focus:bg-indigo-400 text-white font-semibold rounded-lg px-4 py-3 mt-6"
+                className="block w-full px-4 py-3 mt-6 font-semibold text-white bg-indigo-500 rounded-lg hover:bg-indigo-400 focus:bg-indigo-400"
               >
                 Log In
               </button>
             </form>
 
-            <hr className="my-6 border-gray-300 w-full" />
+            <hr className="w-full my-6 border-gray-300" />
 
             <div className="flex justify-between w-full">
               <Link
@@ -204,16 +206,16 @@ function LoginPage() {
             </div>
 
             <p className="mt-8">
-              Need an account?{" "}
+              Need an account?{' '}
               <Link
                 href="/register"
-                className="text-blue-500 hover:text-blue-700 font-semibold"
+                className="font-semibold text-blue-500 hover:text-blue-700"
               >
                 Create an account
               </Link>
               {/* <a
                 href="/register"
-                className="text-blue-500 hover:text-blue-700 font-semibold"
+                className="font-semibold text-blue-500 hover:text-blue-700"
               >
                 Create an account
               </a> */}
@@ -228,8 +230,8 @@ function LoginPage() {
         // onCancel={handleCancel}
         centered
         footer={[
-          <Space align="center" style={{ width: "30%" }}>
-            {" "}
+          <Space align="center" style={{ width: '30%' }}>
+            {' '}
             <Button
               key="submit"
               type="primary"
@@ -237,7 +239,7 @@ function LoginPage() {
               onClick={(e) => {}}
               danger
             >
-              <span style={{ width: "40px" }}>Gửi</span>
+              <span style={{ width: '40px' }}>Gửi</span>
             </Button>
           </Space>,
         ]}
@@ -251,13 +253,13 @@ function LoginPage() {
           renderSeparator={<span className="mx-3">-</span>}
           renderInput={(props) => <input {...props} />}
           containerStyle={{
-            margin: "10px 0",
+            margin: '10px 0',
           }}
           inputStyle={{
-            width: "50px",
-            height: "50px",
-            border: "2px solid black",
-            borderRadius: "5px",
+            width: '50px',
+            height: '50px',
+            border: '2px solid black',
+            borderRadius: '5px',
           }}
         />
       </Modal>
@@ -288,7 +290,7 @@ function LoginPage() {
         })
       } */}
 
-      <FloatButton onClick={() => console.log("click")} />
+      <FloatButton onClick={() => console.log('click')} />
     </>
   );
 }

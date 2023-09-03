@@ -1,14 +1,14 @@
-import React, { PropsWithChildren, ReactElement, useEffect } from "react";
-import Footer from "@/components/layout/Footer";
-import Navbar from "@/components/layout/Navbar";
-import "@/styles/globals.css";
+import React, { PropsWithChildren, ReactElement, useEffect } from 'react';
+import Footer from '@/components/layout/Footer';
+import Navbar from '@/components/layout/Navbar';
+import '@/styles/globals.css';
 
-import type { AppProps } from "next/app";
-import { NextPage } from "next";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
-import Provider from "@/redux/provider";
-import { useRouter } from "next/router";
+import type { AppProps } from 'next/app';
+import { NextPage } from 'next';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
+import Provider from '@/redux/provider';
+import { useRouter } from 'next/router';
 
 export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
   getLayout?: (page: ReactElement) => React.ReactElement;
@@ -27,10 +27,12 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   const router = useRouter();
   const currentUrl = router.asPath;
-  console.log(currentUrl.includes("login"));
+  // console.log(currentUrl);
 
   const isLayout = !(
-    currentUrl.includes("login") || currentUrl.includes("register")
+    currentUrl.includes('login') ||
+    currentUrl.includes('register') ||
+    currentUrl === '/'
   );
 
   return (
@@ -42,7 +44,7 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
             <Layout>
               <Component {...pageProps} />
             </Layout>
-            <div className="max-w-6xl min-h-screen mx-auto">
+            <div className="max-w-6xl mx-auto">
               <Footer />
             </div>
           </div>

@@ -7,11 +7,12 @@ interface Props {
   // subtitle?: string;
   subtitle?: React.ReactNode;
   data: any[];
+  genreName?: string
 }
 
-const AudioBookSection = ({ title, subtitle, data }: Props) => {
+const AudioBookSection = ({ title, subtitle, data, genreName }: Props) => {
   console.log(subtitle);
-  const genreName = subtitle;
+  // const genreName = subtitle;
 
   return (
     <>
@@ -22,7 +23,7 @@ const AudioBookSection = ({ title, subtitle, data }: Props) => {
         <p className="mt-2">
           {subtitle}
           {subtitle ? (
-            <Link href={`/audiobook/genre/${genreName}`} className="text-blue-700 cursor-pointer">
+            <Link href={`/genre/${genreName}`} className="text-blue-700 cursor-pointer">
               tại đây
             </Link>
           ) : (
