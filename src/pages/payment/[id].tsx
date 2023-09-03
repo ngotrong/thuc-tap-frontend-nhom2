@@ -110,7 +110,7 @@ const PaymentPage = () => {
               disabled
             />
             <div className="text-lg font-semibold text-red-500 mt-2 mb-4">
-              Giá gói cước: {pack.amount - (pack.amount * pack.discount) / 100}{" "}
+              Giá gói cước: {pack?.amount - (pack.amount * pack.discount) / 100}{" "}
               VNĐ
             </div>
             <button

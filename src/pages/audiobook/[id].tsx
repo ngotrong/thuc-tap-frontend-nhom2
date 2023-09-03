@@ -53,83 +53,127 @@ const AudiobookDetailPage = () => {
       children: (
         <>
           <Comment.Group className="w-full">
-  <Header as="h3" dividing className="mb-4 text-xl font-semibold">
-    Bình luận
-  </Header>
+            <Header as="h3" dividing className="mb-4 text-xl font-semibold">
+              Bình luận
+            </Header>
 
-  <Comment className="mb-6">
-    <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/matt.jpg" className="w-10 h-10" />
-    <Comment.Content>
-      <Comment.Author as="a" className="text-blue-500 font-semibold">Matt</Comment.Author>
-      <Comment.Metadata>
-        <div className="text-gray-500">Hôm nay lúc 14:50</div>
-      </Comment.Metadata>
-      <Comment.Text className="text-gray-700 mt-2">How artistic!</Comment.Text>
-      <Comment.Actions className="mt-2">
-        <Comment.Action className="text-blue-500 font-semibold mr-3">Trả lời</Comment.Action>
-        <Comment.Action className="text-red-500 font-semibold">Xóa</Comment.Action>
-      </Comment.Actions>
-    </Comment.Content>
-  </Comment>
+            <Comment className="mb-6">
+              <Comment.Avatar
+                src="https://react.semantic-ui.com/images/avatar/small/matt.jpg"
+                className="w-10 h-10"
+              />
+              <Comment.Content>
+                <Comment.Author as="a" className="text-blue-500 font-semibold">
+                  Matt
+                </Comment.Author>
+                <Comment.Metadata>
+                  <div className="text-gray-500">Hôm nay lúc 14:50</div>
+                </Comment.Metadata>
+                <Comment.Text className="text-gray-700 mt-2">
+                  How artistic!
+                </Comment.Text>
+                <Comment.Actions className="mt-2">
+                  <Comment.Action className="text-blue-500 font-semibold mr-3">
+                    Trả lời
+                  </Comment.Action>
+                  <Comment.Action className="text-red-500 font-semibold">
+                    Xóa
+                  </Comment.Action>
+                </Comment.Actions>
+              </Comment.Content>
+            </Comment>
 
-  <Comment className="mb-6">
-    <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/elliot.jpg" className="w-10 h-10" />
-    <Comment.Content>
-      <Comment.Author as="a" className="text-blue-500 font-semibold">Elliot Fu</Comment.Author>
-      <Comment.Metadata>
-        <div className="text-gray-500">Hôm qua lúc 12:30</div>
-      </Comment.Metadata>
-      <Comment.Text className="text-gray-700 mt-2">This has been very useful for my research. Thanks as well!</Comment.Text>
-      <Comment.Actions className="mt-2">
-        <Comment.Action className="text-blue-500 font-semibold mr-3">Trả lời</Comment.Action>
-        <Comment.Action className="text-red-500 font-semibold">Xóa</Comment.Action>
-      </Comment.Actions>
-    </Comment.Content>
-  </Comment>
+            <Comment className="mb-6">
+              <Comment.Avatar
+                src="https://react.semantic-ui.com/images/avatar/small/elliot.jpg"
+                className="w-10 h-10"
+              />
+              <Comment.Content>
+                <Comment.Author as="a" className="text-blue-500 font-semibold">
+                  Elliot Fu
+                </Comment.Author>
+                <Comment.Metadata>
+                  <div className="text-gray-500">Hôm qua lúc 12:30</div>
+                </Comment.Metadata>
+                <Comment.Text className="text-gray-700 mt-2">
+                  This has been very useful for my research. Thanks as well!
+                </Comment.Text>
+                <Comment.Actions className="mt-2">
+                  <Comment.Action className="text-blue-500 font-semibold mr-3">
+                    Trả lời
+                  </Comment.Action>
+                  <Comment.Action className="text-red-500 font-semibold">
+                    Xóa
+                  </Comment.Action>
+                </Comment.Actions>
+              </Comment.Content>
+            </Comment>
 
-  <Comment className="mb-6 ml-10">
-    <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/jenny.jpg" className="w-10 h-10" />
-    <Comment.Content>
-      <Comment.Author as="a" className="text-blue-500 font-semibold">Jenny Hess</Comment.Author>
-      <Comment.Metadata>
-        <div className="text-gray-500">Ngay bây giờ</div>
-      </Comment.Metadata>
-      <Comment.Text className="text-gray-700 mt-2">Elliot you are always so right :))</Comment.Text>
-      <Comment.Actions className="mt-2">
-        <Comment.Action className="text-blue-500 font-semibold mr-3">Trả lời</Comment.Action>
-        <Comment.Action className="text-red-500 font-semibold">Xóa</Comment.Action>
-      </Comment.Actions>
-    </Comment.Content>
-  </Comment>
+            <Comment className="mb-6 ml-10">
+              <Comment.Avatar
+                src="https://react.semantic-ui.com/images/avatar/small/jenny.jpg"
+                className="w-10 h-10"
+              />
+              <Comment.Content>
+                <Comment.Author as="a" className="text-blue-500 font-semibold">
+                  Jenny Hess
+                </Comment.Author>
+                <Comment.Metadata>
+                  <div className="text-gray-500">Ngay bây giờ</div>
+                </Comment.Metadata>
+                <Comment.Text className="text-gray-700 mt-2">
+                  Elliot you are always so right :))
+                </Comment.Text>
+                <Comment.Actions className="mt-2">
+                  <Comment.Action className="text-blue-500 font-semibold mr-3">
+                    Trả lời
+                  </Comment.Action>
+                  <Comment.Action className="text-red-500 font-semibold">
+                    Xóa
+                  </Comment.Action>
+                </Comment.Actions>
+              </Comment.Content>
+            </Comment>
 
-  <Comment className="mb-6">
-    <Comment.Avatar src="https://react.semantic-ui.com/images/avatar/small/joe.jpg" className="w-10 h-10" />
-    <Comment.Content>
-      <Comment.Author as="a" className="text-blue-500 font-semibold">Joe Henderson</Comment.Author>
-      <Comment.Metadata>
-        <div className="text-gray-500">5 ngày trước</div>
-      </Comment.Metadata>
-      <Comment.Text className="text-gray-700 mt-2">Dude, this is awesome. Thanks so much</Comment.Text>
-      <Comment.Actions className="mt-2">
-        <Comment.Action className="text-blue-500 font-semibold mr-3">Trả lời</Comment.Action>
-        <Comment.Action className="text-red-500 font-semibold">Xóa</Comment.Action>
-      </Comment.Actions>
-    </Comment.Content>
-  </Comment>
+            <Comment className="mb-6">
+              <Comment.Avatar
+                src="https://react.semantic-ui.com/images/avatar/small/joe.jpg"
+                className="w-10 h-10"
+              />
+              <Comment.Content>
+                <Comment.Author as="a" className="text-blue-500 font-semibold">
+                  Joe Henderson
+                </Comment.Author>
+                <Comment.Metadata>
+                  <div className="text-gray-500">5 ngày trước</div>
+                </Comment.Metadata>
+                <Comment.Text className="text-gray-700 mt-2">
+                  Dude, this is awesome. Thanks so much
+                </Comment.Text>
+                <Comment.Actions className="mt-2">
+                  <Comment.Action className="text-blue-500 font-semibold mr-3">
+                    Trả lời
+                  </Comment.Action>
+                  <Comment.Action className="text-red-500 font-semibold">
+                    Xóa
+                  </Comment.Action>
+                </Comment.Actions>
+              </Comment.Content>
+            </Comment>
 
-  {/* Các bình luận khác tương tự */}
-  
-  <Form reply className="mt-6">
-    <Form.TextArea className="w-full p-2 border rounded-md" />
-    <Button
-      content="Add Reply"
-      labelPosition="left"
-      icon="edit"
-      primary
-      className="bg-blue-500 hover:bg-blue-600 text-white mt-2 rounded-md px-2"
-    />
-  </Form>
-</Comment.Group>
+            {/* Các bình luận khác tương tự */}
+
+            <Form reply className="mt-6">
+              <Form.TextArea className="w-full p-2 border rounded-md" />
+              <Button
+                content="Add Reply"
+                labelPosition="left"
+                icon="edit"
+                primary
+                className="bg-blue-500 hover:bg-blue-600 text-white mt-2 rounded-md px-2"
+              />
+            </Form>
+          </Comment.Group>
         </>
       ),
     },
